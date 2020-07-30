@@ -1,0 +1,37 @@
+// Copyright (c) Stride contributors (https://stride3d.net) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
+// Distributed under the MIT license. See the LICENSE.md file in the project root for more information.
+
+namespace Stride.Rendering.Images
+{
+    /// <summary>
+    /// A fog shader
+    /// </summary>
+    internal shader FogShader : ImageEffectShader, Camera
+    {
+        [Color3]
+        stage float3 FogColor;
+        stage float b;
+        stage float opacity;
+        stage float nearClipPlane;
+        stage float farClipPlane;
+        stage float zFar;
+
+        stage override float4 Shading()
+        {
+            float3 color = Texture0.Sample(Sampler, streams.TexCoord).rgb;
+            float depth  = Texture1.Sample(PointSampler, streams.TexCoord).x;
+            float depthNormalized = 2.0 * depth - 1.0;
+            float dist = 2.0 * nearClipPlane * farClipPlane / (farClipPlane + nearClipPlane - depthNormalized * (farClipPlane - nearClipPlane));
+
+            float3 finalColor = applyExponentialFog(color, dist);
+            
+            return float4(finalColor, 1.0f);
+        }
+
+        float3 applyExponentialFog( in float3  rgb, in float Distance )
+        {
+            float fogAmount = (1.0 - exp( -Distance*b )) * opacity;
+            return lerp( rgb, FogColor, fogAmount);
+        }
+    };
+}

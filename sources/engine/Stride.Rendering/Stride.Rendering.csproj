@@ -26,6 +26,18 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Rendering\Images\Fog\FogShader.sdsl.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Rendering\Images\Fog\FogShader.sdsl">
+      <LastGenOutput>FogShader.sdsl.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="$(StrideSdkTargets)" />
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
 </Project>
