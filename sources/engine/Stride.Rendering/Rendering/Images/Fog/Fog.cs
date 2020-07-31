@@ -21,7 +21,7 @@ namespace Stride.Rendering.Images
         {
             density = 0.035f;
             opacity = 0.6f;
-            FogColor = new Color3(1.0f);
+            FogColor = new Vector3(1.0f);
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="Fog"/> class.
@@ -57,7 +57,7 @@ namespace Stride.Rendering.Images
         /// <value>The color.</value>
         /// <userdoc>It affects the color of the fog.</userdoc>
         [DataMember(20)]
-        public Color3 FogColor { get; set; }
+        public Vector3 FogColor { get; set; }
 
 
         protected override void InitializeCore()
@@ -71,7 +71,7 @@ namespace Stride.Rendering.Images
             base.SetDefaultParameters();
             density = 0.35f;
             opacity = 0.6f;
-            FogColor = new Color3(1.0f);
+            FogColor = new Vector3(1.0f);
         }
 
         protected override void DrawCore(RenderDrawContext context)
@@ -88,11 +88,11 @@ namespace Stride.Rendering.Images
 
             FogPass.SetInput(0, originalColorBuffer);
             FogPass.SetInput(1, originalDepthBuffer);
-            //FogPass.Parameters.Set(FogShaderKeys.FogColor, FogColor);
-            //FogPass.Parameters.Set(FogShaderKeys.b, density);
-            //FogPass.Parameters.Set(FogShaderKeys.opacity, opacity);
-            //FogPass.Parameters.Set(FogShaderKeys.nearClipPlane, nearClipPlane);
-            //FogPass.Parameters.Set(FogShaderKeys.farClipPlane, farClipPlane);
+            FogPass.Parameters.Set(FogShaderKeys.FogColor, FogColor);
+            FogPass.Parameters.Set(FogShaderKeys.b, density);
+            FogPass.Parameters.Set(FogShaderKeys.opacity, opacity);
+            FogPass.Parameters.Set(FogShaderKeys.nearClipPlane, nearClipPlane);
+            FogPass.Parameters.Set(FogShaderKeys.farClipPlane, farClipPlane);
 
             FogPass.SetOutput(outputTexture);
             ((RendererBase)FogPass).Draw(context);

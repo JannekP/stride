@@ -50,7 +50,7 @@ namespace Stride.Rendering.Images
             Antialiasing = new FXAAEffect();
             rangeCompress = new ImageEffectShader("RangeCompressorShader");
             rangeDecompress = new ImageEffectShader("RangeDecompressorShader");
-            //Fog = new Fog();
+            Fog = new Fog();
             colorTransformsGroup = new ColorTransformGroup();
         }
 
@@ -175,7 +175,7 @@ namespace Stride.Rendering.Images
             Antialiasing.Enabled = false;
             rangeCompress.Enabled = false;
             rangeDecompress.Enabled = false;
-            //Fog.Enabled = false;
+            Fog.Enabled = false;
             colorTransformsGroup.Enabled = false;
         }
 
